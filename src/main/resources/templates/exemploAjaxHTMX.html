@@ -3,6 +3,7 @@
 <head>
     <title>Exemplo AJAX com Thymeleaf Fragment</title>
     <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h2>Formulário de Cadastro</h2>
@@ -11,13 +12,21 @@
         <input type="text" id="name" name="name" required>
 
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
+        <input type="email" id="email" name="email" required 
+               hx-get="/ajax/check-email" 
+               hx-trigger="change" 
+               hx-target="#emailFeedback" 
+               hx-indicator="#emailLoading">
+        
+        <!-- Feedback de disponibilidade de email -->
+        <div id="emailFeedback"></div>
+        <!-- Indicador de carregamento para verificação de email -->
+        <div id="emailLoading">Verificando...</div>
 
-        <button type="submit" >Enviar</button>
+        <button type="submit">Enviar</button>
     </form>
 
     <!-- Div que será substituída pelo fragmento -->
-    <div id="result" style="margin-top:20px;"></div>
-
+    <div id="result"></div>
 </body>
 </html>
